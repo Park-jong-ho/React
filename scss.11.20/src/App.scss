@@ -32,13 +32,63 @@ h2 {
   font-size: $font-mid;
 }
 
-ul {
-  display: grid;
-  gap: 10px;
-}
 
 li {
   color: $color-blue;
   font-weight: $font-thin;
   font-size: $font-small;
+  &:hover { // 자기 자신을 선택할 수 있다 "&"
+    background-color: lightgray;
+  }
+
+  p {
+    color: black;
+    font-weight: $font-bold;
+  }
+
+  div {
+    color: orange;
+  }
+
+  span {
+    color: gray;
+
+    h3 {
+      color: green;
+    }
+  }
+
+  h2{
+    color: red;
+  }
 }
+
+// "mixin을 사용하여 변수 선언, direction에 값을 따로 줘 적지 않으면 기본값이 되도록함.
+@mixin flex ($align, $justify, $gap, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin font ($color, $size, $weight) {
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+ul {
+  // include를 통하여 변수 할당
+  @include flex(start, center, 10px, column);
+  @include font(blue, $font-mid, 900);
+}
+
+section {
+  width: 90vw;
+  color: black;;
+
+  @include flex(center, space-between, 20px);
+  @include font($color-blue, $font-small, $font-thin)
+}
+
