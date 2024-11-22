@@ -1,5 +1,5 @@
 import React from "react"
-import { useReducer } from "react"
+import { useReducer, useState } from "react"
 
 // reducer gkatn
 const reducer = (state, action) => {
