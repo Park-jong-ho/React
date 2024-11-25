@@ -1,35 +1,87 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import styled from "styled-components";
 
-function App() {
-  const [count, setCount] = useState(0)
+const Component = styled.div`
+  font-weight: 700;
+  border: 3px solid blue;
+  border-radius: 10px;
+  flex-grow: 1;
+  line-height: 30px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  > button {
+    margin-left: 10px;
+  }
+`;
 
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+export default function App() {
+  console.log("App");
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container>
+      <Component>
+        App
+        <Container>
+          <Child1 />
+          <Child2 />
+        </Container>
+      </Component>
+    </Container>
+  );
 }
 
-export default App
+function Child1() {
+  console.log("Child1");
+  return (
+    <Component>
+      Child1
+      <Container>
+        <Child3 />
+        <Child4 />
+      </Container>
+    </Component>
+  );
+}
+
+function Child2() {
+  console.log("Child2");
+  return (
+    <Component>
+      Child2
+      <Container>
+        <Child5 />
+        <Child6 />
+      </Container>
+    </Component>
+  );
+}
+
+function Child3() {
+  console.log("Child3");
+  return <Component>Child3 : 0</Component>;
+}
+
+function Child4() {
+  console.log("Child4");
+  return <Component>Child4</Component>;
+}
+
+function Child5() {
+  console.log("Child5");
+  return <Component>Child5</Component>;
+}
+
+function Child6() {
+  console.log("Child6");
+  return (
+    <Component>
+      Child6
+      <button onClick={() => {}}>+</button>
+    </Component>
+  );
+}
