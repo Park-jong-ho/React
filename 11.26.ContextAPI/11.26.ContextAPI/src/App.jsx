@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useCounter } from "./context/counterContext";
 
 const Component = styled.div`
   font-weight: 700;
@@ -29,41 +30,42 @@ export default function App() {
       <Component>
         App
         <Container>
-          <Child1 counter={counter} />
-          <Child2 counter={counter} setCounter={setCounter} />
+          <Child1 />
+          <Child2 />
         </Container>
       </Component>
     </Container>
   );
 }
 
-function Child1({ counter }) {
+function Child1() {
   console.log("Child1");
   return (
     <Component>
       Child1
       <Container>
-        <Child3 counter={counter} />
+        <Child3 />
         <Child4 />
       </Container>
     </Component>
   );
 }
 
-function Child2({ counter, setCounter }) {
+function Child2() {
   console.log("Child2");
   return (
     <Component>
       Child2
       <Container>
         <Child5 />
-        <Child6 counter={counter} setCounter={setCounter} />
+        <Child6 />
       </Container>
     </Component>
   );
 }
 
-function Child3({ counter }) {
+function Child3() {
+  const {counter} = useCounter()
   console.log("Child3");
   return <Component>Child3 : {counter} </Component>;
 }
@@ -78,14 +80,15 @@ function Child5() {
   return <Component>Child5</Component>;
 }
 
-function Child6({ counter, setCounter }) {
+function Child6() {
+  const {setCounter} = useCounter()
   console.log("Child6");
   return (
     <Component>
       Child6
       <button
         onClick={() => {
-          setCounter(counter + 1);
+          setCounter(prev => prev + 1);
         }}
       >
         +
