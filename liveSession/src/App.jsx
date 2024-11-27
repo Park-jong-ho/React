@@ -1,8 +1,9 @@
 // import ActiveUserCount from "./react_hooks/ActiveUserCount"
 import "./App.css"
+import CounterContainer from "./assets/components/CounterContainer"
 // import CounterUserCallback from "./react_hooks/CounterUserCallback"
 // import ReducerCounter from "./react_hooks/Reducercounter"
-import CounterContext from "./react_hooks/Countercontext"
+// import CounterContext fsrom "./react_hooks/Countercontext"
 
 
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
                 {/* <ActiveUserCount /> */}
                 {/* <CounterUserCallback /> */}
                 {/* <ReducerCounter /> */}
-                <CounterContext />
+                {/* <CounterContext /> */}
+                <CounterContainer />
             </div>
         </>
     )
