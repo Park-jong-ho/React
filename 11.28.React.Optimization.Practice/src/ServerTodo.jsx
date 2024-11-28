@@ -1,10 +1,12 @@
 import axios from "axios";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 
 export default function ServerTodo() {
   const [todo, setTodo] = useState([]);
   const inputRef = useRef(null);
 
+  // JSON [123] => "[123]"
+  //"[123]" => [123]
   const fetchData = useCallback(() => {
     axios.get("http://localhost:4000").then((res) => setTodo(res.data));
   }, []);
@@ -42,7 +44,7 @@ export default function ServerTodo() {
         {todo.map((el) => (
           <List
             key={el.id}
-            el={el}
+            {...el}
             updateTodo={updateTodo}
             deleteTodo={deleteTodo}
           />
@@ -52,30 +54,30 @@ export default function ServerTodo() {
   );
 }
 
-const List = ({ el, updateTodo, deleteTodo }) => {
+const List = memo(({ id, content, updateTodo, deleteTodo }) => {
   const [inputValue, setInputValue] = useState("");
 
   return (
     <li>
-      {el.content}
+      {content}
       <input
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
       <button
         onClick={() => {
-          updateTodo(el.id, inputValue);
+          updateTodo(id, inputValue);
         }}
       >
         수정
       </button>
       <button
         onClick={() => {
-          deleteTodo(el.id);
+          deleteTodo(id);
         }}
       >
         X
       </button>
     </li>
   );
-};
+});
