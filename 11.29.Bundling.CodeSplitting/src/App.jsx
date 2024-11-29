@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { lazy, Suspense, useState } from "react";
+import "./App.css";
+import { Route, Routes, useNavigate } from "react-router-dom";
+
+const Main = lazy(() => import("./page/Main"));
+const Detail = lazy(() => import("./page/Detail"));
+const Search = lazy(() => import("./page/Search"));
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <header>
+        <h1>💚 동물 조아 💚</h1>
+        <input
+          value={inputValue}
+          onChange={(event) => setInputValue(event.target.value)}
+        />
+        <button onClick={() => navigate(`/search?animal=${inputValue}`)}>
+          검색
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </header>
+      <Suspense fallback={<h1>로딩중.....</h1>}>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/detail/:id" element={<Detail />}></Route>
+          <Route path="/search" element={<Search />}></Route>
+        </Routes>
+      </Suspense>
+      <footer>all rights reserved to OZ</footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
