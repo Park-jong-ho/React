@@ -1,21 +1,15 @@
 import './App.css'
-import { useEffect } from 'react';
+import { useEffect } from "react"
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchMultiplePokemonById } from './RTK/thunk';
 
 function App() {
 
+  const ditpatch = useDispatch()
+  const pokemonData = useSelector(state => state.pokemon)
+  console.log(pokemonData)
   useEffect(() => {
-    const fetchAPI = async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon-species/1/")
-      const data = await response.json()
-      console.log(data.names.find(el => el.language.name === 'ko').name);
-
-      const pokemonData = {
-        id :1,
-        name: data.names.find(el => el.language.name === 'ko').name
-      }
-    }
-    fetchAPI()
-
+    ditpatch(fetchMultiplePokemonById(151))
   }, [])
 
   return (
