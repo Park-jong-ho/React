@@ -1,4 +1,4 @@
-import {createClient } from "@suabase/supabase-js"
+import { createClient } from "@supabase/supabase-js"
 
 
 // supabase과 통신하는 파일
