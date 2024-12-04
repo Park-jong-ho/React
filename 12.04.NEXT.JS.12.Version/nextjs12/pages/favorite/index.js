@@ -1,4 +1,4 @@
-import Card from "../components/Card"
+import Card from "../../components/Card"
 
 export default function Home({ animals }) {
   console.log(animals)
@@ -11,8 +11,8 @@ export default function Home({ animals }) {
   )
 }
 
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/animal')
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/favorite/animals')
   const data = await res.json()
 
   return {
